@@ -1,0 +1,667 @@
+{
+	"info": {
+		"_postman_id": "5bd69b76-254d-4363-935a-29eb369dc72a",
+		"name": "interface",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户请求接口",
+			"item": [
+				{
+					"name": "test接口",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"zzz\",\r\n    \"password\":789\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户登录接口",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.globals.set(\"token\",res.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"xxx\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户登录验证",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/data",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户注册接口",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"xxx\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户动态接口",
+			"item": [
+				{
+					"name": "发表用户动态",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"PHP是世界上最好的语言~\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/moment",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取动态接口（单个）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/moment/24",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment",
+								"24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取动态接口（列表）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/moment?offset=0&size=24",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改动态接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"我来不及认真的年轻，呃呃呃~\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/moment/23",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除动态接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/moment/3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "动态添加标签",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"labels\":[\"英语\",\"名言\",\"Node\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/moment/5/labels",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"moment",
+								"5",
+								"labels"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户评论接口",
+			"item": [
+				{
+					"name": "发表评论接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"momentId\":3,\r\n    \"content\":\"PHP是世界上最好的语言\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/comment",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "回复评论接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"momentId\":24,\r\n    \"content\":\"C++是世界上最好的语言\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/comment/1/reply",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"comment",
+								"1",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改评论接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"JavaScript语言是世界上最好的语言\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/comment/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除评论接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/comment/19",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"comment",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取评论接口",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/comment?momentId=24",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"comment"
+							],
+							"query": [
+								{
+									"key": "momentId",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "标签数据接口",
+			"item": [
+				{
+					"name": "创建标签接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"c++\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/label",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取标签接口",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/label?limit=5&offset=0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"label"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "上传图像接口",
+			"item": [
+				{
+					"name": "上传头像接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/D:/picture/head_robot.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/upload/avatar",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"upload",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "上传动态配图",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "获取图像（按size）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/moment/images/5251360dad1cc9fadc42eb1bd9d3ad3f?type=large",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"moment",
+								"images",
+								"5251360dad1cc9fadc42eb1bd9d3ad3f"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "large"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
